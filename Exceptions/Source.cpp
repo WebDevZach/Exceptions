@@ -26,6 +26,14 @@ public:
 	}
 };
 
+class invalidRangeException : public exception {
+
+public:
+	invalidRangeException() {
+		cout << "yoooo mama" << endl;
+	}
+};
+
 
 
 
@@ -42,8 +50,13 @@ int main()
 	{
 
 	char ch = 'A';
+	int value = -1;
 
-	cout << character(ch, 1);
+	int asciiValue = static_cast<int>(ch);
+	cout << asciiValue << endl;
+
+
+	cout << character(ch, value);
 	
 
 
@@ -51,6 +64,10 @@ int main()
 	catch (invalidCharacterException)
 	{
 		cout << "fiddlesticks" << endl;
+	}
+	catch (invalidRangeException)
+	{
+		cout << "tatar sauce" << endl;
 	}
 
 
@@ -65,6 +82,8 @@ char character(char start, int offset)
 
 	int asciiValue = static_cast<int>(start);
 
+	
+
 	if (asciiValue < 65)
 	{
 		throw invalidCharacterException();
@@ -77,9 +96,26 @@ char character(char start, int offset)
 	{
 		throw invalidCharacterException();
 	}
-
-
+	
 	int newAsciiValue = start + offset;
+
+	if (newAsciiValue < 65)
+	{
+		throw invalidRangeException();
+	}
+	if (newAsciiValue > 90 && asciiValue < 97)
+	{
+		throw invalidRangeException();
+	}
+	if (newAsciiValue > 122)
+	{
+		throw invalidRangeException();
+	}
+
+
+
+	cout << newAsciiValue << endl;
+
 
 	char end;
 
