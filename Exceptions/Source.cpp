@@ -10,9 +10,25 @@ Exceptions
 */
 
 
+
+
+
 #include <iostream>
+#include <exception>
 
 using namespace std;
+
+class invalidCharacterException : public exception {
+
+public:
+	invalidCharacterException() {
+	cout << "yoooo daddy" << endl;
+	}
+};
+
+
+
+
 
 char character(char, int);
 
@@ -25,23 +41,18 @@ int main()
 	try
 	{
 
+	char ch = 'A';
+
+	cout << character(ch, 1);
 	
 
 
 	}
-	catch ()
+	catch (invalidCharacterException)
 	{
-
+		cout << "fiddlesticks" << endl;
 	}
 
-
-	char ch = 'a';
-	int asciiValue = static_cast<int>(ch);
-	cout << "ASCII value of " << ch << " is: " << asciiValue << endl;
-
-	ch = 'z';
-	asciiValue = static_cast<int>(ch);
-	cout << "ASCII value of " << ch << " is: " << asciiValue << endl;
 
 
 
@@ -50,11 +61,32 @@ int main()
 
 char character(char start, int offset)
 {
+	
 
 	int asciiValue = static_cast<int>(start);
+
+	if (asciiValue < 65)
+	{
+		throw invalidCharacterException();
+	}
+	if (asciiValue > 90 && asciiValue < 97)
+	{
+		throw invalidCharacterException();
+	}
+	if (asciiValue > 122)
+	{
+		throw invalidCharacterException();
+	}
+
+
 	int newAsciiValue = start + offset;
 
+	char end;
+
+	end = static_cast<int>(newAsciiValue);
 
 
-	return;
+	return end;
 }
+
+
