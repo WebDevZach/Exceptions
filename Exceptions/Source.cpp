@@ -39,39 +39,43 @@ char character(char, int);
 
 int main()
 {
-	// capital 65 - 90
-	// lower 97 - 122
+	int selection = 0;
 
-
-	try
+	while (selection != 2)
 	{
 
-		char ch = 'A';
-		int value = 32;
+		try
+		{
 
-		int asciiValue = static_cast<int>(ch);
+			char ch;
+			int offsetValue;
 
+			cout << "Enter a letter: ";
+			cin >> ch;
 
+			cout << "Enter an offset value: ";
+			cin >> offsetValue;
 
-		cout << character(ch, value);
+			int asciiValue = static_cast<int>(ch);
 
-
-
+			cout << "Your new letter: " << character(ch, offsetValue) << endl;
+		}
+		catch (invalidCharacterException)
+		{
+			cout << "fiddlesticks" << endl;
+		}
+		catch (invalidRangeException)
+		{
+			cout << "tatar sauce" << endl;
+		}
+		catch (...)
+		{
+			cout << "generic error" << endl;
+		}
+		
+		cout << "\nPress 2 to exit or 1 to enter another letter" << endl;
+			cin >> selection;
 	}
-	catch (invalidCharacterException)
-	{
-		cout << "fiddlesticks" << endl;
-	}
-	catch (invalidRangeException)
-	{
-		cout << "tatar sauce" << endl;
-	}
-	catch (...)
-	{
-		cout << "generic error" << endl;
-	}
-
-
 
 
 	return 0;
@@ -98,7 +102,6 @@ char character(char start, int offset)
 		}
 
 		newAsciiValue = start + offset;
-		cout << newAsciiValue << endl;
 
 		if (newAsciiValue < 97)
 		{
@@ -124,7 +127,6 @@ char character(char start, int offset)
 		}
 
 		newAsciiValue = start + offset;
-		cout << newAsciiValue << endl;
 
 		if (newAsciiValue < 65)
 		{
