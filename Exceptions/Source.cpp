@@ -5,7 +5,7 @@ CIS 1202 201
 
 7/26/2023
 
-Exceptions 
+Exceptions
 
 */
 
@@ -15,23 +15,20 @@ Exceptions
 
 #include <iostream>
 #include <exception>
+#include <cctype>
 
 using namespace std;
 
 class invalidCharacterException : public exception {
 
 public:
-	invalidCharacterException() {
-	cout << "yoooo daddy" << endl;
-	}
+	invalidCharacterException() {}
 };
 
 class invalidRangeException : public exception {
 
 public:
-	invalidRangeException() {
-		cout << "yoooo mama" << endl;
-	}
+	invalidRangeException() {}
 };
 
 
@@ -49,15 +46,15 @@ int main()
 	try
 	{
 
-	char ch = 'A';
-	int value = -1;
+		char ch = '7';
+		int value = 25;
 
-	int asciiValue = static_cast<int>(ch);
-	cout << asciiValue << endl;
+		int asciiValue = static_cast<int>(ch);
+		
 
 
-	cout << character(ch, value);
-	
+		cout << character(ch, value);
+
 
 
 	}
@@ -69,35 +66,52 @@ int main()
 	{
 		cout << "tatar sauce" << endl;
 	}
+	catch (...)
+	{
+		cout << "generic error" << endl;
+	}
 
 
 
 
-	return 0; 
+	return 0;
 }
 
 char character(char start, int offset)
 {
-	
+	int asciiValue;
 
-	int asciiValue = static_cast<int>(start);
 
-	
+	if (islower(start))
+	{
+		asciiValue = static_cast<int>(start);
 
-	if (asciiValue < 65)
-	{
-		throw invalidCharacterException();
+		if (asciiValue < 97)
+		{
+			throw invalidCharacterException();
+		}
+		if (asciiValue > 122)
+		{
+			throw invalidCharacterException();
+		}
 	}
-	if (asciiValue > 90 && asciiValue < 97)
+	else
 	{
-		throw invalidCharacterException();
+		asciiValue = static_cast<int>(start);
+
+		if (asciiValue < 65)
+		{
+			throw invalidCharacterException();
+		}
+		if (asciiValue > 90)
+		{
+			throw invalidCharacterException();
+		}
 	}
-	if (asciiValue > 122)
-	{
-		throw invalidCharacterException();
-	}
-	
+
 	int newAsciiValue = start + offset;
+
+	cout << newAsciiValue << endl;
 
 	if (newAsciiValue < 65)
 	{
@@ -112,9 +126,6 @@ char character(char start, int offset)
 		throw invalidRangeException();
 	}
 
-
-
-	cout << newAsciiValue << endl;
 
 
 	char end;
