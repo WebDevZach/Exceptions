@@ -46,11 +46,11 @@ int main()
 	try
 	{
 
-		char ch = '7';
-		int value = 25;
+		char ch = 'A';
+		int value = 32;
 
 		int asciiValue = static_cast<int>(ch);
-		
+
 
 
 		cout << character(ch, value);
@@ -80,6 +80,8 @@ int main()
 char character(char start, int offset)
 {
 	int asciiValue;
+	int newAsciiValue;
+	char end;
 
 
 	if (islower(start))
@@ -94,6 +96,19 @@ char character(char start, int offset)
 		{
 			throw invalidCharacterException();
 		}
+
+		newAsciiValue = start + offset;
+		cout << newAsciiValue << endl;
+
+		if (newAsciiValue < 97)
+		{
+			throw invalidRangeException();
+		}
+
+		if (newAsciiValue > 122)
+		{
+			throw invalidRangeException();
+		}
 	}
 	else
 	{
@@ -107,31 +122,21 @@ char character(char start, int offset)
 		{
 			throw invalidCharacterException();
 		}
+
+		newAsciiValue = start + offset;
+		cout << newAsciiValue << endl;
+
+		if (newAsciiValue < 65)
+		{
+			throw invalidCharacterException();
+		}
+		if (newAsciiValue > 90)
+		{
+			throw invalidCharacterException();
+		}
 	}
-
-	int newAsciiValue = start + offset;
-
-	cout << newAsciiValue << endl;
-
-	if (newAsciiValue < 65)
-	{
-		throw invalidRangeException();
-	}
-	if (newAsciiValue > 90 && asciiValue < 97)
-	{
-		throw invalidRangeException();
-	}
-	if (newAsciiValue > 122)
-	{
-		throw invalidRangeException();
-	}
-
-
-
-	char end;
 
 	end = static_cast<int>(newAsciiValue);
-
 
 	return end;
 }
